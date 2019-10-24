@@ -290,6 +290,7 @@ def create_issue():
             url=form['url'].encode('utf-8')))
         # Check if the form is valid
         if not is_valid_issue_form(form):
+            log.info('Invalid issue form request')
             abort(400)
         if form.get('submit_type') == PROXY_REPORT:
             # Checking blacklisted domains
@@ -315,6 +316,7 @@ def create_issue():
                 session['form'] = form
                 return redirect(url_for('login'))
     else:
+        log.info('No idea. Abort from /issues/new')
         abort(400)
 
 
